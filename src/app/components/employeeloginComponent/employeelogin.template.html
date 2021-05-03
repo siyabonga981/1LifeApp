@@ -17,10 +17,6 @@
                 <mat-error align="start" *ngIf="employeeLoginForm.controls.password.touched &amp;&amp; employeeLoginForm.controls.password.invalid">Password is required</mat-error>
               </mat-form-field>
             </div>
-            <div fxLayout="column wrap" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
-              <p>
-                Forgot password?</p>
-            </div>
             <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><button mat-raised-button class="fullWidth colorWhite btnPrimary" (click)="loginUser(employeeLoginForm)" [disabled]="employeeLoginForm.invalid">Login</button></div>
           </form>
         </div>

@@ -1,6 +1,7 @@
 <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
   <div fxLayout="column wrap" class="marginauto width86" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
-    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false"><span class="font12 colorPrimary">
+                <span class="font600 font12 cursor" routerLink="../home">&lt; Back To Dashboard</span> </span>
       <h2>
         Claim Number - {{newClaimNumber}}</h2>
     </div>
@@ -104,7 +105,7 @@
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 ID Number <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                                <input matInput placeholder="ID Number" [required]="false" formControlName="idNumber" (focusout)="onIdFocusOut($event)">
+                                <input matInput placeholder="ID Number" [required]="false" formControlName="idNumber" (focusout)="onIdFocusOut($event)" maxLength="13">
                                 <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;required&apos;)">ID Number is required</mat-error>
                                 <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;minLength&apos;)">ID has to be 13 numbers</mat-error>
                                 <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;maxLength&apos;)">ID has to be 13 numbers</mat-error>
@@ -329,7 +330,7 @@
     </div>
     <div fxLayout="column wrap" class="marginbottom30 fullWidth" fxFlex="100" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
       <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="!changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveClaim(claimsForm, eventDetailsForm)">SAVE</button></div>
-      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveBeneficiary(claimsForm)">SAVE</button></div>
+      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveBeneficiary(claimsForm)" [disabled]="claimsForm.isInvalid">SAVE</button></div>
     </div>
   </div>
 </div>

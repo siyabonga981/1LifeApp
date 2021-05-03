@@ -15,6 +15,8 @@ window['neutrinos'] = {
 }
 
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-tableComponent
+import { tableComponent } from '../components/tableComponent/table.component';
 //CORE_REFERENCE_IMPORT-claimregistrationComponent
 import { claimregistrationComponent } from '../components/claimregistrationComponent/claimregistration.component';
 //CORE_REFERENCE_IMPORT-existingclaimsComponent
@@ -41,8 +43,6 @@ import { claimsComponent } from '../components/claimsComponent/claims.component'
 import { searchComponent } from '../components/searchComponent/search.component';
 //CORE_REFERENCE_IMPORT-dialogService
 import { dialogService } from '../services/dialog/dialog.service';
-//CORE_REFERENCE_IMPORT-dashboardComponent
-import { dashboardComponent } from '../components/dashboardComponent/dashboard.component';
 //CORE_REFERENCE_IMPORT-employeeloginComponent
 import { employeeloginComponent } from '../components/employeeloginComponent/employeelogin.component';
 
@@ -72,6 +72,8 @@ export const appDeclarations = [
   PageNotFoundComponent,
   ArtImgSrcDirective,
   //CORE_REFERENCE_PUSH_TO_DEC_ARRAY
+//CORE_REFERENCE_PUSH_TO_DEC_ARRAY-tableComponent
+tableComponent,
 //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-claimregistrationComponent
 claimregistrationComponent,
 //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-existingclaimsComponent
@@ -94,8 +96,6 @@ sidenavComponent,
 claimsComponent,
 //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-searchComponent
 searchComponent,
-//CORE_REFERENCE_PUSH_TO_DEC_ARRAY-dashboardComponent
-dashboardComponent,
 //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-employeeloginComponent
 employeeloginComponent,
 
@@ -130,5 +130,5 @@ dialogService,
 
 // CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY_START
 export const appRoutes = [{path: '1Life', component: containerComponent,
-children: [{path: 'home', component: indexComponent},{path: 'claims', component: claimsComponent},{path: 'search', component: searchComponent},{path: 'dashboard', component: dashboardComponent},{path: 'users', component: usermaintenanceComponent},{path: 'existingclaims', component: existingclaimsComponent},{path: 'claimregistration', component: claimregistrationComponent}]},{path: 'login', component: employeeloginComponent},{path: '', redirectTo: 'login', pathMatch: 'full'},{path: '**', component: PageNotFoundComponent}]
+children: [{path: 'home', component: indexComponent},{path: 'claims', component: claimsComponent},{path: 'search', component: searchComponent},{path: 'users', component: usermaintenanceComponent},{path: 'existingclaims', component: existingclaimsComponent},{path: 'claimregistration', component: claimregistrationComponent}]},{path: 'login', component: employeeloginComponent},{path: 'table', component: tableComponent},{path: '', redirectTo: 'login', pathMatch: 'full'},{path: '**', component: PageNotFoundComponent}]
 // CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY_END

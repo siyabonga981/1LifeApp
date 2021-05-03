@@ -73,13 +73,15 @@ export class claimsComponent extends NBaseComponent implements OnInit {
         this.getNextClaimNumber();
     }
     saveClaim(person, event) {
+        let current_datetime = new Date()
+        let formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear()
         let claimObj = {
             "claimNumber": this.newClaimNumber,
             "policyNumber": this.selectedPolicy.idNumber,
             "capturedBy": this.employee.fullName,
             "status": "New",
             "event": {
-                "date": new Date().toDateString().slice(4, 16),
+                "date": formatted_date,
                 "city": event.value.eventCity,
                 "town": event.value.eventTown,
                 "province": event.value.eventProvince,
@@ -93,18 +95,19 @@ export class claimsComponent extends NBaseComponent implements OnInit {
             }
         }
         this.selectedPolicy.existingClaims.push(claimObj);
-        this.api.addNewClaim('addNewClaim', this.selectedPolicy)
-            .then(res => {
-                localStorage.setItem('selectedPolicy', JSON.stringify(this.selectedPolicy))
-                this.snackBar.open('Claim saved succesfully', 'Dismiss', {
-                    duration: 3500,
-                    horizontalPosition: this.horizontalPosition,
-                    verticalPosition: this.verticalPosition,
-                });
-                setTimeout(() => {
-                    this.router.navigate(['./1Life/existingclaims']);
-                }, 5000);
-            })
+        console.log(person)
+        // this.api.addNewClaim('addNewClaim', this.selectedPolicy)
+        //     .then(res => {
+        //         localStorage.setItem('selectedPolicy', JSON.stringify(this.selectedPolicy))
+        //         this.snackBar.open('Claim saved succesfully', 'Dismiss', {
+        //             duration: 3500,
+        //             horizontalPosition: this.horizontalPosition,
+        //             verticalPosition: this.verticalPosition,
+        //         });
+        //         setTimeout(() => {
+        //             this.router.navigate(['./1Life/existingclaims']);
+        //         }, 5000);
+        //     })
     }
 
     onIdFocusOut(event: Event) {
@@ -175,6 +178,9 @@ export class claimsComponent extends NBaseComponent implements OnInit {
     addContact() {
         this.formReset();
         this.changeInput = true;
+        this.snackBar.open('Form is ready for input', 'Dismiss', {
+            duration: 3500
+        });
     }
 
     formReset() {

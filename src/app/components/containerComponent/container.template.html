@@ -38,13 +38,13 @@
                 Add new</div>
             </div>
           </div>
-          <div fxLayout="column wrap" fxFlex="100" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CEO&apos; || this.employee.role.id == &apos;CM&apos;">
-            <div fxLayout="row wrap" class="cursor" fxLayoutAlign="start center" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" fxFlex="100" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div fxLayout="row wrap" class="cursor" fxLayoutAlign="start center" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CEO&apos; || this.employee.role.id == &apos;CM&apos;">
               <div fxLayout="column wrap" class="marginr15" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CM&apos; || &apos;CEO&apos; "><img imgSrc="img/user3.svg"></div>
               <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12 colorWhite">
                 User Maintenance</span></div>
             </div>
-            <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CEO&apos; || this.employee.role.id == &apos;CM&apos;">
               <div routerLink="./users" class="cursor font600 font12 sidenavLink colorPrimary">
                 Users</div>
             </div>
@@ -58,7 +58,6 @@
                 <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span (click)="toggle()" class="font600 font12 colorWhite">
                 Logout</span></div>
               </div>
-              <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"></div>
             </div>
           </div>
         </div>

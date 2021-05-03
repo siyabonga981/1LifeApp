@@ -34,36 +34,6 @@ export class api {
 
   //   service flows_api
 
-  async addEmployee(key = '', payload: any = undefined, ...others) {
-    try {
-      var bh = {
-        input: {
-          key: key,
-          payload: payload,
-        },
-        local: {
-          result: undefined,
-          serverUrl: 'http://localhost:8081/api',
-        },
-      };
-      bh = this.sdService.__constructDefault(bh);
-      bh = await this.sd_BkgZof1ggHkQB343(bh);
-      //appendnew_next_addEmployee
-      return (
-        // formatting output variables
-        {
-          input: {},
-          local: {
-            result: bh.local.result,
-            serverUrl: bh.local.serverUrl,
-          },
-        }
-      );
-    } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_MSD0VaPLZd4h2UBy');
-    }
-  }
-
   async getEmployees(key = '', ...others) {
     try {
       var bh = {
@@ -119,35 +89,6 @@ export class api {
       );
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_OOqSWFK9VHus3Eer');
-    }
-  }
-
-  async getBeneficiaries(key: any = undefined, ...others) {
-    try {
-      var bh = {
-        input: {
-          key: key,
-        },
-        local: {
-          result: undefined,
-          serverUrl: 'http://localhost:8081/api',
-        },
-      };
-      bh = this.sdService.__constructDefault(bh);
-      bh = await this.sd_02uIN05wL1jFgGvg(bh);
-      //appendnew_next_getBeneficiaries
-      return (
-        // formatting output variables
-        {
-          input: {},
-          local: {
-            result: bh.local.result,
-            serverUrl: bh.local.serverUrl,
-          },
-        }
-      );
-    } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_PBvmaDyd2WTe1JuU');
     }
   }
 
@@ -300,42 +241,36 @@ export class api {
     }
   }
 
-  //appendnew_flow_api_start
-
-  async sd_BkgZof1ggHkQB343(bh) {
+  async getBeneficiaries(key: any = undefined, ...others) {
     try {
-      let url = `${bh.local.serverUrl}/${bh.input.key}`;
-      bh = await this.sd_pxvQY30SMeWvqKFE(bh);
-      //appendnew_next_sd_BkgZof1ggHkQB343
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_BkgZof1ggHkQB343');
-    }
-  }
-
-  async sd_pxvQY30SMeWvqKFE(bh) {
-    try {
-      let basePath = bh.system.environment.properties.ssdURL.endsWith('/')
-        ? bh.system.environment.properties.ssdURL
-        : bh.system.environment.properties.ssdURL + '/';
-      let url = `addEmployee/`;
-      let finalUrl = basePath + url;
-      let requestOptions = {
-        url: finalUrl,
-        method: 'post',
-        responseType: 'json',
-        reportProgress: undefined,
-        headers: {},
-        params: {},
-        body: bh.input.payload,
+      var bh = {
+        input: {
+          key: key,
+        },
+        local: {
+          result: undefined,
+          serverUrl: 'http://localhost:8081/api',
+        },
       };
-      bh.result = await this.sdService.nHttpRequest(requestOptions);
-      //appendnew_next_sd_pxvQY30SMeWvqKFE
-      return bh;
+      bh = this.sdService.__constructDefault(bh);
+      bh = await this.sd_02uIN05wL1jFgGvg(bh);
+      //appendnew_next_getBeneficiaries
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            result: bh.local.result,
+            serverUrl: bh.local.serverUrl,
+          },
+        }
+      );
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_pxvQY30SMeWvqKFE');
+      return await this.errorHandler(bh, e, 'sd_PBvmaDyd2WTe1JuU');
     }
   }
+
+  //appendnew_flow_api_start
 
   async sd_eph8xzq3fqJzx37V(bh) {
     try {
@@ -402,40 +337,6 @@ export class api {
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_y66WcqbSxa1k7mcW');
-    }
-  }
-
-  async sd_02uIN05wL1jFgGvg(bh) {
-    try {
-      bh = await this.sd_aSPK7E8ZguJjpbJr(bh);
-      //appendnew_next_sd_02uIN05wL1jFgGvg
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_02uIN05wL1jFgGvg');
-    }
-  }
-
-  async sd_aSPK7E8ZguJjpbJr(bh) {
-    try {
-      let basePath = bh.system.environment.properties.ssdURL.endsWith('/')
-        ? bh.system.environment.properties.ssdURL
-        : bh.system.environment.properties.ssdURL + '/';
-      let url = `beneficiaries/`;
-      let finalUrl = basePath + url;
-      let requestOptions = {
-        url: finalUrl,
-        method: 'get',
-        responseType: 'json',
-        reportProgress: undefined,
-        headers: {},
-        params: {},
-        body: undefined,
-      };
-      bh.local.result = await this.sdService.nHttpRequest(requestOptions);
-      //appendnew_next_sd_aSPK7E8ZguJjpbJr
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_aSPK7E8ZguJjpbJr');
     }
   }
 
@@ -629,6 +530,40 @@ export class api {
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_qYVVXZpbwHPlNsIu');
+    }
+  }
+
+  async sd_02uIN05wL1jFgGvg(bh) {
+    try {
+      bh = await this.sd_aSPK7E8ZguJjpbJr(bh);
+      //appendnew_next_sd_02uIN05wL1jFgGvg
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_02uIN05wL1jFgGvg');
+    }
+  }
+
+  async sd_aSPK7E8ZguJjpbJr(bh) {
+    try {
+      let basePath = bh.system.environment.properties.ssdURL.endsWith('/')
+        ? bh.system.environment.properties.ssdURL
+        : bh.system.environment.properties.ssdURL + '/';
+      let url = `beneficiaries/`;
+      let finalUrl = basePath + url;
+      let requestOptions = {
+        url: finalUrl,
+        method: 'get',
+        responseType: 'json',
+        reportProgress: undefined,
+        headers: {},
+        params: {},
+        body: undefined,
+      };
+      bh.local.result = await this.sdService.nHttpRequest(requestOptions);
+      //appendnew_next_sd_aSPK7E8ZguJjpbJr
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_aSPK7E8ZguJjpbJr');
     }
   }
 

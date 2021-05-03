@@ -26,7 +26,7 @@ export class searchComponent extends NBaseComponent implements OnInit {
     searchResult: any;
     employee: any;
     searchForm: FormGroup;
-    selectedPolicyForm: FormGroup;
+    // selectedPolicyForm: FormGroup;
     foundClaims: boolean = false;
     foundPolicies: boolean = false;
     isSubmitted: boolean = false;
@@ -44,9 +44,9 @@ export class searchComponent extends NBaseComponent implements OnInit {
             searchPhrase: ['', [Validators.required]]
         });
 
-        this.selectedPolicyForm = this.formBuilder.group({
-            selectedPolicyF: ['', [Validators.required]]
-        });
+        // this.selectedPolicyForm = this.formBuilder.group({
+        //     selectedPolicyF: ['', [Validators.required]]
+        // });
     }
 
     ngOnInit() {
@@ -67,14 +67,14 @@ export class searchComponent extends NBaseComponent implements OnInit {
         this.api.search('search', form.value)
             .then(res => {
                 this.searchResult = res.local.result;
+                console.log(this.searchResult)
                 if (this.searchResult[0].existingClaims.length > 0) {
                     this.foundClaims = true;
                 }
-                if (this.searchResult[0].policies.length) {
+                if (this.searchResult[0].policies.length > 0) {
                     this.foundPolicies = true;
                 }
             })
-
     }
     generateClaim(form) {
         localStorage.setItem('selectedPolicy', form.value.selectedPolicyF);
