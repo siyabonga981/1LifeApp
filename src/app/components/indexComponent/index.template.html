@@ -1,0 +1,126 @@
+<div fxLayout="row wrap" fxLayoutAlign="center start" [fxShow]="true" [fxHide]="false" fxFill>
+  <div fxLayout="column wrap" fxFlex="80" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="row wrap" class="margintop50 fullWidth" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <h1 class="font600 font18">
+          What Would You Like To Do?</h1>
+      </div>
+    </div>
+    <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="row wrap" class="cursor border5 tealBg height120" fxFlex="49" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><img imgSrc="img/illustartion.svg" class="iconOffset30"></div>
+        <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <h1 class="marginr80 font18 colorWhite font600">
+            Claim History</h1>
+        </div>
+      </div>
+      <div fxLayout="row wrap" class="cursor border5 height120 blueBg" fxFlex="49" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><img imgSrc="img/illustration.svg" class="iconOffset30"></div>
+        <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <h1 class="font18 marginr80 colorWhite font600">
+            Track Payment</h1>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column wrap" class="marginbottom15 margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <mat-tab-group mat-align-tabs="start" class="homeTab">
+        <mat-tab label="LIVE STATISICS" class="font600 font12 colorWhite">
+          <div fxLayout="column wrap" class="marginbottom30 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+              <div fxLayout="row wrap" class="fullWidth" fxFlex="49" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                  <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <h1 class="marginr80 font18 font600">
+                      Life Claim Finalized In The Month</h1>
+                  </div>
+                  <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <div>
+                      <table class="fullWidth" mat-table [dataSource]="claimDataSource">
+                        <ng-container matColumnDef="status">
+                          <th mat-header-cell class *matHeaderCellDef> CLAIM STATUS </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.status}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="count">
+                          <th mat-header-cell class *matHeaderCellDef> COUNT </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.count}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="value">
+                          <th mat-header-cell class *matHeaderCellDef> VALUE </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.value}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row class="font12 font600 beigeBg" *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row class="font12 font600" *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxLayout="row wrap" class="fullWidth" fxFlex="49" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                  <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <h1 class="marginr80 font18 font600">
+                      Funeral Claim Finalized In The Month</h1>
+                  </div>
+                  <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <div>
+                      <table class="fullWidth" mat-table [dataSource]="funeralDataSource">
+                        <ng-container matColumnDef="status">
+                          <th mat-header-cell class *matHeaderCellDef> CLAIM STATUS </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.status}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="count">
+                          <th mat-header-cell class *matHeaderCellDef> COUNT </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.count}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="value">
+                          <th mat-header-cell class *matHeaderCellDef> VALUE </th>
+                          <td mat-cell class="font12" *matCellDef="let item"> {{item.value}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row class="font12 font600 beigeBg" *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row class="font12 font600" *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="DASHBOARD" class="font12 font600 colorWhite">
+          <div fxLayout="row wrap" class="margintop40 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <mat-card class="fullWidth">
+              <mat-card-content>
+                <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                  <div fxLayout="column wrap" fxFlex="45" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <h2>
+                      Funeral Claims Doughnut</h2>
+                    <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                      <div>
+                        <canvas baseChart [datasets]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutchartcolors" chartType="doughnut"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxLayout="column wrap" fxFlex="45" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <h2>
+                      Funeral Claims Bar Chart</h2>
+                    <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                      <div fxFlex="100">
+                        <canvas baseChart [datasets]="doughnutChartData" [labels]="this.chartFuneralLabels" [colors]="doughnutchartcolors" [legend]="false" chartType="bar"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

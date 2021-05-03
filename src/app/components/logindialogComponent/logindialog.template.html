@@ -1,0 +1,11 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" fxFill>
+  <div fxLayout="column wrap" style="height: 250px; width; 050px;" fxFlex="100" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" style="width: 100px;" class="marginbottom15" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><img [src]="data.imgUrl"></div>
+    <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div class="marginbottom15">
+        Your login was {{ data.status }}
+      </div>
+    </div>
+    <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><button mat-raised-button class="colorWhite btnPrimary" *ngIf="data.status==&apos;Successful&apos;" mat-dialog-close>Get Started</button><button mat-raised-button class="colorWhite fullWidth" mat-dialog-close *ngIf="data.status!==&apos;Successful&apos;" color="warn">Okay</button></div>
+  </div>
+</div>

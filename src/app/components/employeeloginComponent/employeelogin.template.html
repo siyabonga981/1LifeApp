@@ -1,0 +1,30 @@
+<div fxLayout="column wrap" style="background: url(&apos;assets/img/formBg.jpg&apos;); background-size: cover;" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" fxFill>
+  <div fxLayout="row wrap" fxFlex="80" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
+    <mat-card class="card">
+      <mat-card-content align="center">
+        <div fxLayout="column wrap" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><img imgSrc="img/logo.png"></div>
+        <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <form [formGroup]="employeeLoginForm" autocomplete="off" class="fullWidth">
+            <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                <input matInput type="email" placeholder="Email" [required]="false" formControlName="email">
+                <mat-error align="start" *ngIf="employeeLoginForm.controls.email.touched &amp;&amp; employeeLoginForm.controls.email.invalid">Please enter email address</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                <input matInput type="password" placeholder="Password" [required]="false" formControlName="password">
+                <mat-error align="start" *ngIf="employeeLoginForm.controls.password.touched &amp;&amp; employeeLoginForm.controls.password.invalid">Password is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column wrap" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
+              <p>
+                Forgot password?</p>
+            </div>
+            <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><button mat-raised-button class="fullWidth colorWhite btnPrimary" (click)="loginUser(employeeLoginForm)" [disabled]="employeeLoginForm.invalid">Login</button></div>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

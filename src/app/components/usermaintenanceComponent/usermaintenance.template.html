@@ -1,0 +1,41 @@
+<div fxLayout="row wrap" fxLayoutAlign="center start" [fxShow]="true" [fxHide]="false" fxFill>
+  <div fxLayout="column wrap" fxFlex="80" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" class="marginbottom15 margintop50" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <h1 class="marginr80 font18 font600">
+          System Users</h1>
+      </div>
+      <div fxLayout="column wrap" fxFlex="80" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div>
+          <table class="fullWidth" mat-table [dataSource]="this.employeeDatasource">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell class *matHeaderCellDef> Employee Name </th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.fullName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="roleId">
+              <th mat-header-cell class *matHeaderCellDef> Employee Role ID </th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.role.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="roleDescription">
+              <th mat-header-cell class *matHeaderCellDef> Employee Description</th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.role.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell class *matHeaderCellDef> Action</th>
+              <td mat-cell class="font12" *matCellDef="let item">
+                <mat-icon (click)="openDialog(item)" class="colorPrimary cursor" matTooltip="Click to edit employee details">edit</mat-icon>
+                <mat-icon class="colorRed cursor" (click)="deleteEmployee(item._id)" matTooltip="Click to delete employee">delete</mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row class="font12 font600 beigeBg" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="font12 font600" *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

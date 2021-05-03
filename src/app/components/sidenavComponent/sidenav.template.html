@@ -1,0 +1,61 @@
+<div fxLayout="row wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" fxFill>
+  <div fxLayout="column wrap" fxFlex="100" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="row wrap" class="bgWhite toolbar" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="row wrap" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" class="logo" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><img imgSrc="img/logo.png" class="cursor"></div>
+          <div fxLayout="column wrap" class="marginr24" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><img imgSrc="img/Hamburger.svg" (click)="sidenav.toggle()" class="hamburger cursor"></div>
+        </div>
+      </div>
+      <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="row wrap" class="cursor" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" class="marginr15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <mat-icon class="cursor" (click)="toggleSearch()" *ngIf="hide">search</mat-icon>
+            <mat-form-field [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="true">
+              <input matInput placeholder="Input" [required]="false" *ngIf="hide">
+
+            </mat-form-field>
+          </div>
+          <div fxLayout="column wrap" class="font500 colorPrimary iconOffset30 font14" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span>
+            {{ employee.fullName }}</span></div>
+          <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <mat-icon class="font600 colorPrimary cursor height10 font14">expand_more</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-sidenav-container class="sideNavContainer fullWidth">
+      <mat-sidenav #sidenav [mode]="&apos;over&apos;" [position]="&apos;start&apos;" [opened]="false">
+        <div fxLayout="column wrap" class="sideNavColumn" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div fxLayout="column wrap" class="marginbottom30" fxFlex="100" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <div fxLayout="row wrap" class="cursor" fxLayoutAlign="start center" [fxShow]="true" [fxHide]="false">
+                <div fxLayout="column wrap" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
+                  <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                    <mat-icon class="lighterGrey marginr10">add_circle_outline</mat-icon>
+                  </div>
+                </div>
+                <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span (click)="toggle()" class="font600 font12 colorWhite">
+                New Claim</span></div>
+              </div>
+              <div routerLink="./claims" class="cursor font600 font12 sidenavLink colorPrimary">
+                Add new</div>
+            </div>
+          </div>
+          <div fxLayout="column wrap" fxFlex="100" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CEO&apos; || this.employee.role.id == &apos;CM&apos;">
+            <div fxLayout="row wrap" class="cursor" fxLayoutAlign="start center" [fxShow]="true" [fxHide]="false">
+              <div fxLayout="column wrap" class="marginr15" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="this.employee.role.id == &apos;CM&apos; || &apos;CEO&apos; "><img imgSrc="img/user3.svg"></div>
+              <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12 colorWhite">
+                User Maintenance</span></div>
+            </div>
+            <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" routerLink="./users">
+              <div class="cursor font600 font12 sidenavLink colorPrimary">
+                Users</div>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav>
+      <router-outlet></router-outlet>
+    </mat-sidenav-container>
+  </div>
+</div>

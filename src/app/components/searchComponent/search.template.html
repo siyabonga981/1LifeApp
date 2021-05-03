@@ -1,0 +1,142 @@
+<div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+  <div fxLayout="column wrap" class="marginauto width86" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" class="margintop50" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false"><span class="font12 colorPrimary">
+                <!-- <mat-icon>keyboard_arrow_left</mat-icon>--> <span class="font600 font12">Back To Dashboard</span> </span></div>
+    </div>
+    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <mat-card class="margintop50">
+        <mat-card-content>
+          <form [formGroup]="searchForm">
+            <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="space-evenly center" [fxShow]="true" [fxHide]="false">
+              <div fxLayout="column wrap" fxFlex="35" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                <p class="font12 font600">
+                  Please Enter Type of Search Criteria</p>
+                <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;">
+                  <mat-select formControlName="searchCriteria" class="font600 font12" placeholder="Select Type of Search Criteria" [required]="false">
+                    <ng-template ngFor let-option [ngForOf]="searchCriteria" let-i="index">
+                      <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+                    </ng-template>
+                  </mat-select>
+                  <mat-error align="start" *ngIf="searchForm.controls.searchCriteria.touched &amp;&amp; searchForm.controls.searchCriteria.invalid">Search Criteria is required.</mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column wrap" fxFlex="35" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                <p class="font600 font12">
+                  Please Enter The Details</p>
+                <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                  <input matInput placeholder="Please Enter The Details" [required]="false" formControlName="searchPhrase">
+                  <mat-error align="start" *ngIf="searchForm.controls.searchPhrase.touched &amp;&amp; searchForm.controls.searchPhrase.invalid">Please enter a search phrase</mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column wrap" fxFlex="15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><button mat-raised-button class="searchBtn colorWhite" (click)="search(searchForm)" [disabled]="searchForm.invalid">Search</button></div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="foundClaims">
+          <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <h1 class="marginr80 font18 font600">
+              Existing Claims</h1>
+          </div>
+          <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div>
+              <table class="fullWidth" mat-table [dataSource]="searchResult[0].existingClaims">
+                <ng-container matColumnDef="claimNumber">
+                  <th mat-header-cell class *matHeaderCellDef> CLAIM NUMBER </th>
+                  <td mat-cell class="font12 colorPrimary" *matCellDef="let item">
+                    {{item.claimNumber}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="policyNumber">
+                  <th mat-header-cell class *matHeaderCellDef> POLICY NUMBER </th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policyNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eventDate">
+                  <th mat-header-cell class *matHeaderCellDef> EVENT DATE </th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.event.date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="claimBy">
+                  <th mat-header-cell class *matHeaderCellDef> CLAIM BY</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.claim.madeBy}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="claimType">
+                  <th mat-header-cell class *matHeaderCellDef> CLAIM TYPE</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.claim.type}} </td>
+                </ng-container>
+
+                <tr mat-header-row class="font12 font600 greyBg" *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row class="font12 font600" *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="foundPolicies">
+          <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <h1 class="marginr80 font18 font600">
+              Policies</h1>
+          </div>
+          <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+            <div>
+              <table class="fullWidth" mat-table [dataSource]="searchResult">
+                <ng-container matColumnDef="policyNumber">
+                  <th mat-header-cell class *matHeaderCellDef> POLICY NUMBER </th>
+                  <td mat-cell class="font12 colorPrimary" *matCellDef="let item">
+                    <form [formGroup]="selectedPolicyForm">
+                      <mat-radio-button formControlName="selectedPolicyF" value="{{item | json}}" ngDefaultControl [checked]="selectedPolicy == item"></mat-radio-button> {{item.policies[0].policyNumber}}
+                    </form>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="product">
+                  <th mat-header-cell class *matHeaderCellDef> PRODUCT </th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policies[0].product}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fullName">
+                  <th mat-header-cell class *matHeaderCellDef> FULL NAME </th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.fullName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="relationship">
+                  <th mat-header-cell class *matHeaderCellDef> RELATIONSHIP</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policies[0].relationship}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell class *matHeaderCellDef> STATUS</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policies[0].status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfCancellation">
+                  <th mat-header-cell class *matHeaderCellDef> DATE OF CANCELLATION</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policies[0].dateOfCancellation}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="riskType">
+                  <th mat-header-cell class *matHeaderCellDef> Risk Type</th>
+                  <td mat-cell class="font12" *matCellDef="let item"> {{item.policies[0].riskType}} </td>
+                </ng-container>
+
+                <tr mat-header-row class="font12 font600 greyBg" *matHeaderRowDef="policiesColumns"></tr>
+                <tr mat-row class="font12 font600" *matRowDef="let row; columns: policiesColumns;"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column wrap" class="marginbottom30 margintop50 fullWidth" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><button mat-raised-button routerLink="../search" class="colorWhite btnPrimary" *ngIf="isSubmitted" (click)="generateClaim(selectedPolicyForm)" [disabled]="selectedPolicyForm.invalid">GENERATE NEW CLAIM</button></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div fxLayout="column wrap" style="margin: 0 auto;" class="width86" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+  <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <h1 class="marginr80 font18 font600">
+          Existing Claims</h1>
+      </div>
+      <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div>
+          <table class="fullWidth" mat-table [dataSource]="claimsArray">
+            <ng-container matColumnDef="claimNumber">
+              <th mat-header-cell *matHeaderCellDef> CLAIM NUMBER </th>
+              <td mat-cell class="font12 cursor" *matCellDef="let item">
+                {{item.claimNumber}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="policyNumber">
+              <th mat-header-cell *matHeaderCellDef> POLICY NUMBER </th>
+              <td mat-cell class="font12" *matCellDef="let item">
+                {{item.policyNumber}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="eventDate">
+              <th mat-header-cell *matHeaderCellDef> EVENT DATE </th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.event.date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="claimType">
+              <th mat-header-cell *matHeaderCellDef> CLAIM TYPE </th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.claim.type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="claimBy">
+              <th mat-header-cell *matHeaderCellDef> CLAIM BY</th>
+              <td mat-cell class="font12" *matCellDef="let item"> {{item.claim.madeBy}} </td>
+            </ng-container>
+
+            <tr mat-header-row class="font12 font600 greyBg" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="font12 font600" *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column wrap" class="marginbottom30 margintop50 fullWidth" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><button mat-raised-button routerLink="../search" class="colorWhite btnPrimary" *ngIf="isSubmitted" (click)="generateClaim(selectedPolicyForm)" [disabled]="selectedPolicyForm.invalid">GENERATE NEW CLAIM</button></div>
+  </div>
+</div>
