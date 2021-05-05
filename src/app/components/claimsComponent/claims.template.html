@@ -1,6 +1,7 @@
 <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
   <div fxLayout="column wrap" class="marginauto width86" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
-    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false"><span class="font12 colorPrimary">
+                <span class="font600 font12 cursor" routerLink="../home">&lt; Back To Dashboard</span> </span>
       <h2>
         Claim Number - {{newClaimNumber}}</h2>
     </div>
@@ -24,7 +25,7 @@
           <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
             <div fxLayout="column wrap" class="margintop40 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
               <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
-                <div fxLayout="column wrap" class="marginright40 marginleft20 fullWidth" fxFlex="12" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngFor="let beneficiary of selectedPolicy.policies[0].beneficiaries">
+                <div fxLayout="column wrap" class="marginright40 marginleft20 fullWidth" fxFlex="12" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngFor="let beneficiary of this.selectedPolicy.policies[0].beneficiaries">
                   <mat-card [class.isMainContact]="beneficiary.contact.mainContact == &apos;true&apos;" (click)="changeSelectInput()" class="hoverBorder beneficiaryCard cursor fullWidth">
                     <mat-card-content align="center">
                       <div fxLayout="column wrap" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><img imgSrc="img/user.svg" class="userIcon colorWhite">
@@ -54,7 +55,7 @@
                     <mat-card style="padding: 24px;">
                       <mat-card-content>
                         <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
-                          <div fxLayout="row wrap" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                          <div fxLayout="row wrap" class="marginbottom15" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Title <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;">
@@ -63,25 +64,25 @@
                                     <mat-option [value]="option.value">{{option.title}}</mat-option>
                                   </ng-template>
                                 </mat-select>
-                                <mat-error align="start" *ngIf="claimsForm.controls.title.touched &amp;&amp; claimsForm.controls.title.invalid">Please select title</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;title&apos;).hasError(&apos;required&apos;)">Title is required</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="!changeInput"><span class="font600 font12">
                 First Name <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;">
-                                <mat-select formControlName="firstName" placeholder="First name" [required]="false" (selectionChange)="onSelect($event)" (valueChanges)="onSelect($event)">
+                                <mat-select formControlName="firstName" placeholder="First Name" [required]="false" (selectionChange)="onSelect($event)" (valueChanges)="onSelect($event)">
                                   <ng-template ngFor let-option [ngForOf]="selectedPolicy.policies[0].beneficiaries" let-i="index">
                                     <mat-option [value]="option">{{option.fullName.split(&apos; &apos;)[0]}}</mat-option>
                                   </ng-template>
                                 </mat-select>
-                                <mat-error align="start" *ngIf="claimsForm.controls.firstName.touched &amp;&amp; claimsForm.controls.firstName.invalid">Please select first name</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;firstName&apos;).touched &amp;&amp; claimsForm.get(&apos;firstName&apos;).hasError(&apos;required&apos;)">Required to select first name</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="changeInput"><span class="font600 font12">
                 First Name <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                                <input matInput placeholder="First Name" [required]="false" formControlName="firstName" pattern="[a-zA-Z ]*">
-                                <mat-error align="start" *ngIf="claimsForm.get(&apos;firstName&apos;).touched &amp;&amp; claimsForm.get(&apos;firstName&apos;).hasError(&apos;required&apos;)">Please enter first name</mat-error>
+                                <input matInput placeholder="First Name" [required]="false" formControlName="firstName">
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;firstName&apos;).touched &amp;&amp; claimsForm.get(&apos;firstName&apos;).hasError(&apos;required&apos;)">First name is required</mat-error>
                                 <mat-error align="start" *ngIf="claimsForm.get(&apos;firstName&apos;).touched &amp;&amp; claimsForm.get(&apos;firstName&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                               </mat-form-field>
                             </div>
@@ -90,37 +91,38 @@
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                                 <input matInput placeholder="Surname" [required]="false" formControlName="surname">
                                 <mat-error align="start" *ngIf="claimsForm.controls.surname.touched &amp;&amp; claimsForm.controls.surname.invalid">Please enter surname</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;surname&apos;).touched &amp;&amp; claimsForm.get(&apos;surname&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                               </mat-form-field>
                             </div>
                           </div>
-                          <div fxLayout="row wrap" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                          <div fxLayout="row wrap" class="marginbottom15" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Initials</span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                                <input matInput type="text" placeholder="Initials" [required]="false" formControlName="initials" disabled>
-
+                                <input matInput type="text" placeholder="Initials" [required]="false" formControlName="initials">
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;initials&apos;).touched &amp;&amp; claimsForm.get(&apos;initials&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 ID Number <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                                <input matInput placeholder="ID Number" [required]="false" formControlName="idNumber" (focusout)="onIdFocusOut($event)">
+                                <input matInput type="text" placeholder="ID Number" [required]="false" formControlName="idNumber" (focusout)="onIdFocusOut($event)" maxLength="13">
                                 <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;required&apos;)">ID Number is required</mat-error>
-                                <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;minLength&apos;)">ID has to be 13 numbers</mat-error>
-                                <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;maxLength&apos;)">ID has to be 13 numbers</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched  &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;minlength&apos;)">ID has to be 13 numbers</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;idNumber&apos;).touched &amp;&amp; claimsForm.get(&apos;idNumber&apos;).hasError(&apos;pattern&apos;)">ID has to be numbers only</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Date of Birth </span>
                               <mat-form-field [appearance]="&apos;outline&apos;">
-                                <input matInput placeholder="Date of Birth" [matDatepicker]="picker" formControlName="dateOfBirth" value="beneficiary.dob" [required]="false" [disabled]="false">
-                                <mat-datepicker-toggle matSuffix [for]="picker" disabled="false"></mat-datepicker-toggle>
+                                <input matInput placeholder="Date of Birth" [matDatepicker]="picker" formControlName="dateOfBirth" value="beneficiary.dob" [required]="false" [disabled]="true">
+                                <mat-datepicker-toggle matSuffix [for]="picker" disabled="true"></mat-datepicker-toggle>
                                 <mat-datepicker #picker [disabled]="false"></mat-datepicker>
 
                               </mat-form-field>
                             </div>
                           </div>
-                          <div fxLayout="row wrap" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                          <div fxLayout="row wrap" class="marginbottom15" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Relationship <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;never&apos;">
@@ -129,7 +131,7 @@
                                     <mat-option [value]="option.value">{{option.title}}</mat-option>
                                   </ng-template>
                                 </mat-select>
-                                <mat-error align="start" *ngIf="claimsForm.controls.relationship.touched &amp;&amp; claimsForm.controls.relationship.invalid">Relationship is required</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.controls.relationship.touched &amp;&amp; claimsForm.get(&apos;relationship&apos;).hasError(&apos;required&apos;)">Relationship is required</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
@@ -137,7 +139,7 @@
                                 Gender <span class="colorRed">*</span></p>
                               <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
                                 <div fxLayout="row wrap" class="radioGroup" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
-                                  <mat-radio-group class="radioGroup" formControlName="gender" [required]="false">
+                                  <mat-radio-group class="radioGroup" formControlName="gender" [required]="true">
                                     <mat-radio-button class="radioMargin" [required]="false" value="Male" [labelPosition]="&apos;after&apos;">Male</mat-radio-button>
                                     <mat-radio-button [required]="false" value="Female" [labelPosition]="&apos;after&apos;">Female</mat-radio-button>
                                   </mat-radio-group>
@@ -148,11 +150,12 @@
                 Cell Number <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                                 <input matInput type="text" placeholder="Cell Number" [required]="false" formControlName="cellNumber">
-                                <mat-error align="start" *ngIf="claimsForm.controls.cellNumber.touched &amp;&amp; claimsForm.controls.cellNumber.invalid">Cell number is required</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.controls.cellNumber.touched &amp;&amp; claimsForm.get(&apos;cellNumber&apos;).hasError(&apos;required&apos;)">Cell number is required</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;cellNumber&apos;).touched &amp;&amp; claimsForm.get(&apos;cellNumber&apos;).hasError(&apos;cellNumber&apos;)">Cell number has to be +27xxxxxxxxx</mat-error>
                               </mat-form-field>
                             </div>
                           </div>
-                          <div fxLayout="row wrap" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                          <div fxLayout="row wrap" class="marginbottom15" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Home Telephone</span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
@@ -175,12 +178,13 @@
                               </mat-form-field>
                             </div>
                           </div>
-                          <div fxLayout="row wrap" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
+                          <div fxLayout="row wrap" class="marginbottom15" fxLayoutAlign="space-between center" [fxShow]="true" [fxHide]="false">
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Email Address <span class="colorRed">*</span></span>
                               <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                                 <input matInput type="email" placeholder="Email Address" [required]="false" formControlName="email">
                                 <mat-error align="start" *ngIf="claimsForm.controls.email.touched &amp;&amp; claimsForm.controls.email.invalid">Email is required</mat-error>
+                                <mat-error align="start" *ngIf="claimsForm.get(&apos;email&apos;).touched &amp;&amp; claimsForm.get(&apos;email&apos;).hasError(&apos;email&apos;)">Please enter valid email</mat-error>
                               </mat-form-field>
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
@@ -188,7 +192,7 @@
                                 Communication Type <span class="colorRed">*</span></p>
                               <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
                                 <div fxLayout="row wrap" class="radioGroup" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
-                                  <mat-radio-group class="radioGroup" formControlName="communicationType" [required]="false">
+                                  <mat-radio-group class="radioGroup" formControlName="communicationType" [selected]="false" [required]="true">
                                     <mat-radio-button class="radioMargin" [required]="false" value="SMS" [labelPosition]="&apos;after&apos;">SMS</mat-radio-button>
                                     <mat-radio-button class="radioMargin" [required]="false" value="Email" [labelPosition]="&apos;after&apos;">Email</mat-radio-button>
                                   </mat-radio-group>
@@ -197,20 +201,14 @@
                             </div>
                             <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
                               <p class="font600 font12">
-                                Main Contact</p>
+                                Main Contact <span class="colorRed">*</span></p>
                               <div fxLayout="row wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
-                                <mat-radio-group class="radioGroup" formControlName="isMainContact" [required]="false">
+                                <mat-radio-group class="radioGroup" formControlName="isMainContact" [required]="true">
                                   <mat-radio-button class="radioMargin" [required]="false" value="true" [labelPosition]="&apos;after&apos;">Yes</mat-radio-button>
                                   <mat-radio-button class="radioMargin" [required]="false" value="false" [labelPosition]="&apos;after&apos;">No</mat-radio-button>
                                 </mat-radio-group>
                               </div>
                             </div>
-                          </div>
-                          <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="!changeInput"><span class="fullWidth font600 font12">
-                Point of connection</span>
-                            <mat-form-field class="width65" [appearance]="&apos;outline&apos;">
-                              <textarea matInput formControlName="pointOfConnection" placeholder="Point of connection" [required]="false"></textarea>
-                            </mat-form-field>
                           </div>
                         </div>
                       </mat-card-content>
@@ -228,28 +226,31 @@
                 Street<span class="colorRed">*</span></span>
                             <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                               <input matInput type="text" placeholder="Street" [required]="false" formControlName="street">
-                              <mat-error align="start" *ngIf="claimsForm.controls.street.touched &amp;&amp; claimsForm.controls.street.invalid">Street is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.controls.street.touched &amp;&amp; claimsForm.get(&apos;street&apos;).hasError(&apos;required&apos;)">Street is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.get(&apos;street&apos;).touched &amp;&amp; claimsForm.get(&apos;street&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                             </mat-form-field>
                           </div>
                           <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Town <span class="colorRed">*</span></span>
                             <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                               <input matInput type="text" placeholder="Town" [required]="false" formControlName="town">
-                              <mat-error align="start" *ngIf="claimsForm.controls.town.touched &amp;&amp; claimsForm.controls.town.invalid">Town is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.controls.town.touched &amp;&amp; claimsForm.get(&apos;town&apos;).hasError(&apos;required&apos;)">Town is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.get(&apos;town&apos;).touched &amp;&amp; claimsForm.get(&apos;town&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                             </mat-form-field>
                           </div>
                           <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 City <span class="colorRed">*</span></span>
                             <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                               <input matInput type="text" placeholder="City" [required]="false" formControlName="city">
-                              <mat-error align="start" *ngIf="claimsForm.controls.city.touched &amp;&amp; claimsForm.controls.city.invalid">City is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.controls.city.touched &amp;&amp; claimsForm.get(&apos;city&apos;).hasError(&apos;required&apos;)">City is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.get(&apos;city&apos;).touched &amp;&amp; claimsForm.get(&apos;city&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                             </mat-form-field>
                           </div>
                           <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Code<span class="colorRed">*</span></span>
                             <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                               <input matInput type="number" placeholder="Code" [required]="false" formControlName="code">
-                              <mat-error align="start" *ngIf="claimsForm.controls.code.touched &amp;&amp; claimsForm.controls.code.invalid">Code is required</mat-error>
+                              <mat-error align="start" *ngIf="claimsForm.controls.code.touched &amp;&amp; claimsForm.get(&apos;code&apos;).hasError(&apos;required&apos;)">Code is required</mat-error>
                             </mat-form-field>
                           </div>
                           <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
@@ -269,52 +270,51 @@
               <mat-card style="padding: 24px;">
                 <mat-card-content class="width65">
                   <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
-                    <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
+                    <div fxLayout="column wrap" class="marginbottom15" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                      <div fxLayout="column wrap" class="marginbottom15" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
+                Street <span class="colorRed">*</span></span>
+                        <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                          <input matInput type="text" placeholder="Street" [required]="false" formControlName="street">
+                          <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;street&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;street&apos;).hasError(&apos;required&apos;)">Street is required</mat-error>
+                          <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;street&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;street&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="column wrap" class="marginbottom15" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
+                Event Town <span class="colorRed">*</span></span>
+                        <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                          <input matInput type="text" placeholder="Event Town" [required]="false" formControlName="eventTown">
+                          <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventTown&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventTown&apos;).hasError(&apos;required&apos;)">Event Town is required</mat-error>
+                          <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventTown&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventTown&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
+                        </mat-form-field>
+                      </div><span class="font600 font12">
                 Event City<span class="colorRed">*</span></span>
                       <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                         <input matInput type="text" placeholder="Event City" [required]="false" formControlName="eventCity">
-                        <mat-error align="start" *ngIf="eventDetailsForm.controls.eventCity.touched &amp;&amp; eventDetailsForm.controls.eventCity.invalid">Event City is required</mat-error>
+                        <mat-error align="start" *ngIf="eventDetailsForm.controls.eventCity.touched &amp;&amp; eventDetailsForm.get(&apos;eventCity&apos;).hasError(&apos;required&apos;)">Event City is required</mat-error>
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventCity&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventCity&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                       </mat-form-field>
                     </div>
-                    <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
-                Event Town <span class="colorRed">*</span></span>
-                      <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                        <input matInput type="text" placeholder="Event Town" [required]="false" formControlName="eventTown">
-                        <mat-error align="start" *ngIf="eventDetailsForm.controls.eventTown.touched &amp;&amp; eventDetailsForm.controls.eventTown.invalid">Event Town is required</mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
+                    <div fxLayout="column wrap" class="marginbottom15" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Event Province <span class="colorRed">*</span></span>
                       <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                         <input matInput type="text" placeholder="Event Province" [required]="false" formControlName="eventProvince">
-                        <mat-error align="start" *ngIf="eventDetailsForm.controls.eventProvince.touched &amp;&amp; eventDetailsForm.controls.eventProvince.invalid">Event Province is required</mat-error>
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventProvince&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventProvince&apos;).hasError(&apos;required&apos;)">Event Province is required</mat-error>
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventProvince&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventProvince&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                       </mat-form-field>
                     </div>
-                    <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
+                    <div fxLayout="column wrap" class="marginbottom15" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Event Code<span class="colorRed">*</span></span>
                       <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                        <input matInput type="number" placeholder="Event Code" [required]="false" formControlName="eventCode">
-                        <mat-error align="start" *ngIf="eventDetailsForm.controls.eventCode.touched &amp;&amp; eventDetailsForm.controls.eventCode.invalid">Event Code is required</mat-error>
+                        <input matInput type="number" placeholder="Event Code" [required]="true" formControlName="eventCode">
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;eventCode&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;eventCode&apos;).hasError(&apos;required&apos;)">Event Code is required</mat-error>
                       </mat-form-field>
                     </div>
                     <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
                 Claim Type<span class="colorRed">*</span></span>
                       <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
                         <input matInput type="text" placeholder="Claim Type" [required]="false" formControlName="claimType">
-                        <mat-error align="start" *ngIf="eventDetailsForm.controls.claimType.touched &amp;&amp; eventDetailsForm.controls.claimType.invalid">Claim Type is required.</mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
-                Cause<span class="colorRed">*</span></span>
-                      <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
-                        <input matInput placeholder="Cause" [required]="false" formControlName="cause">
-
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="fullWidth font600 font12">
-                Cause Comment</span>
-                      <mat-form-field class="fullWidth" [appearance]="&apos;outline&apos;">
-                        <textarea matInput formControlName="causeComment" placeholder="Cause comment" [required]="false"></textarea>
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;claimType&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;claimType&apos;).hasError(&apos;required&apos;)">Claim Type is required.</mat-error>
+                        <mat-error align="start" *ngIf="eventDetailsForm.get(&apos;claimType&apos;).touched &amp;&amp; eventDetailsForm.get(&apos;claimType&apos;).hasError(&apos;pattern&apos;)">Characters not allowed</mat-error>
                       </mat-form-field>
                     </div>
                     <div fxLayout="column wrap" fxFlex="30" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><span class="font600 font12">
@@ -328,8 +328,8 @@
       </mat-tab-group>
     </div>
     <div fxLayout="column wrap" class="marginbottom30 fullWidth" fxFlex="100" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false">
-      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="!changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveClaim(claimsForm, eventDetailsForm)">SAVE</button></div>
-      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveBeneficiary(claimsForm)">SAVE</button></div>
+      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="!changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveClaim(claimsForm, eventDetailsForm)" [disabled]="claimsForm.invalid || eventDetailsForm.invalid">SAVE</button></div>
+      <div fxLayout="column wrap" fxFlex="33" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false" *ngIf="changeInput"><button mat-raised-button class="colorWhite btnPrimary" (click)="saveBeneficiary(claimsForm)" [disabled]="claimsForm.invalid">SAVE</button></div>
     </div>
   </div>
 </div>

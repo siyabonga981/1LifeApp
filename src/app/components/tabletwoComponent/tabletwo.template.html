@@ -1,0 +1,108 @@
+<div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+  <div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+    <div fxLayout="column wrap" class="marginauto width86" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+      <div fxLayout="row wrap" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" class="margintop50" fxLayoutAlign="start start" [fxShow]="true" [fxHide]="false"><span class="font12 colorPrimary">
+                <span class="font600 font12 cursor" routerLink="../home">&lt; Back To Dashboard</span> </span></div>
+      </div>
+      <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <mat-card class="margintop50">
+          <mat-card-content>
+            <form [formGroup]="searchForm">
+              <div fxLayout="row wrap" class="fullWidth" fxLayoutAlign="space-evenly center" [fxShow]="true" [fxHide]="false">
+                <div fxLayout="column wrap" fxFlex="35" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                  <p class="font12 font600">
+                    Please Enter Type of Search Criteria</p>
+                  <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;">
+                    <mat-select formControlName="searchCriteria" class="font600 font12" placeholder="Select Type of Search Criteria" [required]="false">
+                      <ng-template ngFor let-option [ngForOf]="searchCriteria" let-i="index">
+                        <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+                      </ng-template>
+                    </mat-select>
+                    <mat-error align="start" *ngIf="searchForm.controls.searchCriteria.touched &amp;&amp; searchForm.controls.searchCriteria.invalid">Search Criteria is required.</mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column wrap" fxFlex="35" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+                  <p class="font600 font12">
+                    Please Enter The Details</p>
+                  <mat-form-field [appearance]="&apos;outline&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+                    <input matInput placeholder="Please Enter The Details" [required]="false" formControlName="searchPhrase">
+                    <mat-error align="start" *ngIf="searchForm.controls.searchPhrase.touched &amp;&amp; searchForm.controls.searchPhrase.invalid">Please enter a search phrase</mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column wrap" fxFlex="15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false"><button mat-raised-button class="searchBtn colorWhite" (click)="search(searchForm)" [disabled]="searchForm.invalid">Search</button></div>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="foundClaims">
+            <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <h1 class="marginr80 font18 font600">
+                Existing Claims</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column wrap" class="margintop50 fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+        <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+          <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false" *ngIf="foundPolicies">
+            <div fxLayout="column wrap" class="marginbottom15" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <h1 class="marginr80 font18 font600">
+                Policies</h1>
+            </div>
+            <div fxLayout="column wrap" class="fullWidth" fxLayoutAlign="start stretch" [fxShow]="true" [fxHide]="false">
+              <div>
+                {{ this.searchResult[0].existingClaims | json }}
+              </div>
+              <div fxLayout="column">
+                <table mat-table [dataSource]="searchResult[0].existingClaims" class="table-width-fix">
+
+                  <tr mat-row *matRowDef="let row; columns: [&apos;policies[0].policyNumber&apos;,&apos;policies[0].product&apos;,&apos;fullName&apos;,&apos;policies[0].relationship&apos;,&apos;policies[0].status&apos;,&apos;policies[0].dateOfCancellation&apos;,&apos;policies[0].riskType&apos;];"></tr>
+
+                  <ng-container matColumnDef="policies[0].policyNumber">
+                    <th mat-header-cell *matHeaderCellDef>POLICY NUMBER</th>
+                    <td mat-cell *matCellDef="let table; let i = index;"> {{table.policies[0].policyNumber}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="policies[0].product">
+                    <th mat-header-cell *matHeaderCellDef>PRODUCT</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.policies[0].product}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fullName">
+                    <th mat-header-cell *matHeaderCellDef>FULL NAME</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.fullName}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="policies[0].relationship">
+                    <th mat-header-cell *matHeaderCellDef>RELATIONSHIP</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.policies[0].relationship}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="policies[0].status">
+                    <th mat-header-cell *matHeaderCellDef>STATUS</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.policies[0].status}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="policies[0].dateOfCancellation">
+                    <th mat-header-cell *matHeaderCellDef>DATE OF CANCELLATION</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.policies[0].dateOfCancellation}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="policies[0].riskType">
+                    <th mat-header-cell *matHeaderCellDef>RISK TYPE</th>
+                    <td mat-cell *matCellDef="let table; let i = index;">{{table.policies[0].riskType}}</td>
+                  </ng-container>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column wrap" class="marginbottom30 margintop50 fullWidth" fxLayoutAlign="center center" [fxShow]="true" [fxHide]="false"><button mat-raised-button routerLink="../search" class="colorWhite btnPrimary" *ngIf="isSubmitted" (click)="generateClaim(selectedPolicyForm)">GENERATE NEW CLAIM</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

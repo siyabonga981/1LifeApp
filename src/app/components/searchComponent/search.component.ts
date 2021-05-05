@@ -63,10 +63,10 @@ export class searchComponent extends NBaseComponent implements OnInit {
 
     search(form) {
         this.isSubmitted = true;
-        console.log(form.value)
         this.api.search('search', form.value)
             .then(res => {
                 this.searchResult = res.local.result;
+                console.log(this.searchResult)
                 if (this.searchResult[0].existingClaims.length > 0) {
                     this.foundClaims = true;
                 }
@@ -77,7 +77,10 @@ export class searchComponent extends NBaseComponent implements OnInit {
 
     }
     generateClaim(form) {
-        localStorage.setItem('selectedPolicy', form.value.selectedPolicyF);
+        let policy = JSON.parse(form.value.selectedPolicyF);
+        console.log(policy);
+        localStorage.setItem('selectedPolicy', JSON.stringify(policy));
+        console.log(JSON.parse(localStorage.getItem('selectedPolicy')))
         this.router.navigate(['1Life/claims']);
     }
 }
