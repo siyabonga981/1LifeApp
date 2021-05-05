@@ -213,7 +213,11 @@ span.mat-button-wrapper {
 }
 
 .hoverBorder:hover {
-    border: 1px solid #5981b3;
+    border: 1px solid #5981B3;
+}
+
+.selected {
+    border: 1px solid #5981B3;
 }
 
 .fullWidth {
@@ -221,7 +225,7 @@ span.mat-button-wrapper {
 }
 
 .isMainContact {
-    background: #5981b3 0% 0% no-repeat padding-box !important;
+    background: #5981B3 0% 0% no-repeat padding-box !important;
     color: #fff;
     .userIcon {
         filter: invert(100%) sepia(0%) saturate(9500%) hue-rotate(138deg) brightness(157%) contrast(117%);
@@ -237,11 +241,11 @@ span.mat-button-wrapper {
 }
 
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #5981b3;
+    background-color: #5981B3;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #5981b3;
+    border-color: #5981B3;
 }
 
 .searchBtn {
@@ -278,13 +282,10 @@ span.mat-button-wrapper {
 
 .contactText {
     margin-top: 15px;
-    //   margin-left: 12px;
 }
 
 .radioGroup {
     height: 65px !important;
-    position: relative;
-    top: 2px !important;
 }
 
 .radioMargin {
@@ -335,7 +336,7 @@ span.mat-button-wrapper {
         color: white;
     }
     .mat-ink-bar {
-        background-color: #edf3f5 !important;
+        background-color: #EDF3F5 !important;
         height: 0;
     }
 }

@@ -65,16 +65,22 @@ export class claimsComponent extends NBaseComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.selectedPolicy = JSON.parse(localStorage.getItem('selectedPolicy'));
         this.employee = this._methodsService.getUserFromSessionStorage();
         this.getClients();
-        this.selectedPolicy = this._methodsService.shareSearchComponentData();
+        this.getNextClaimNumber();
         console.log(this.selectedPolicy);
         this.onSelect('');
-        this.getNextClaimNumber();
     }
+
     saveClaim(person, event) {
+<<<<<<< HEAD
         let current_datetime = new Date()
         let formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear()
+=======
+        console.log(person);
+        console.log(event);
+>>>>>>> 0e37286787caac0ad9e8c57f59ce0ca9be105dbc
         let claimObj = {
             "claimNumber": this.newClaimNumber,
             "policyNumber": this.selectedPolicy.idNumber,
@@ -95,6 +101,7 @@ export class claimsComponent extends NBaseComponent implements OnInit {
             }
         }
         this.selectedPolicy.existingClaims.push(claimObj);
+<<<<<<< HEAD
         console.log(person)
         // this.api.addNewClaim('addNewClaim', this.selectedPolicy)
         //     .then(res => {
@@ -108,6 +115,28 @@ export class claimsComponent extends NBaseComponent implements OnInit {
         //             this.router.navigate(['./1Life/existingclaims']);
         //         }, 5000);
         //     })
+=======
+        this.api.addNewClaim('addNewClaim', this.selectedPolicy)
+            .then(res => {
+                if (res) {
+                    localStorage.setItem('selectedPolicy', JSON.stringify(this.selectedPolicy))
+                    this.snackBar.open('Claim saved succesfully', 'Dismiss', {
+                        duration: 3500,
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                    });
+                    setTimeout(() => {
+                        this.router.navigate(['./1Life/existingclaims']);
+                    }, 5000);
+                } else {
+                    this.snackBar.open('Claim could not be saved', 'Dismiss', {
+                        duration: 3500,
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                    });
+                }
+            })
+>>>>>>> 0e37286787caac0ad9e8c57f59ce0ca9be105dbc
     }
 
     onIdFocusOut(event: Event) {
@@ -127,17 +156,21 @@ export class claimsComponent extends NBaseComponent implements OnInit {
         if (Number(this.idNum.slice(10, 11)) !== 0) {
             return false;
         } else {
-            this.claimsForm.patchValue({
-                dateOfBirth: new Date(dob)
-            });
-            if (this.idNum.charAt(6) < '5') {
+            if (this.idNum.charAt(6) !== null) {
                 this.claimsForm.patchValue({
-                    gender: "Female"
+                    dateOfBirth: new Date(dob)
                 });
-            } else {
-                this.claimsForm.patchValue({
-                    gender: "Male"
-                });
+                if (this.idNum.charAt(6) !== null) {
+                    if (this.idNum.charAt(6) < '5') {
+                        this.claimsForm.patchValue({
+                            gender: "Female"
+                        });
+                    } else {
+                        this.claimsForm.patchValue({
+                            gender: "Male"
+                        });
+                    }
+                }
             }
         }
     }
@@ -173,6 +206,7 @@ export class claimsComponent extends NBaseComponent implements OnInit {
         } else {
             this.newClaimNumber = this.selectedPolicy.idNumber + '-' + (Number(Math.max(...claimNumbers)) + Number("1"));
         }
+        console.log(claimNumbers)
     }
 
     addContact() {
@@ -247,7 +281,6 @@ export class claimsComponent extends NBaseComponent implements OnInit {
             email: this.beneficiary.contact.email,
             communicationType: this.beneficiary.contact.communicationType,
             isMainContact: this.beneficiary.contact.mainContact,
-            pointOfConnection: this.beneficiary.pointOfConnection,
             street: this.beneficiary.address.street,
             town: this.beneficiary.address.town,
             city: this.beneficiary.address.city,
@@ -257,38 +290,36 @@ export class claimsComponent extends NBaseComponent implements OnInit {
 
     createBeneficiaryForm() {
         this.claimsForm = this.formBuilder.group({
-            title: ["", [Validators.required, Validators.pattern]],
-            firstName: ["", [Validators.required, Validators.pattern]],
-            surname: ["", [Validators.required]],
-            initials: ["", []],
-            idNumber: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
-            dateOfBirth: ["", []],
+            title: ["", [Validators.required]],
+            firstName: ["", [Validators.required]],
+            surname: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            initials: ["", [Validators.pattern('[a-zA-Z ]*')]],
+            idNumber: ["", [Validators.required, Validators.minLength(13), Validators.pattern('^[0-9]+$')]],
+            dateOfBirth: ['', []],
             relationship: ["", [Validators.required]],
             gender: ["", [Validators.required]],
-            cellNumber: ["", [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
-            homeTelephone: ["", []],
-            workTelephone: ["", []],
-            faxNumber: ["", []],
+            cellNumber: ["", [Validators.required, Validators.maxLength(12),]],
+            homeTelephone: [""],
+            workTelephone: [""],
+            faxNumber: [""],
             email: ["", [Validators.required, Validators.email]],
             communicationType: ["", [Validators.required]],
             isMainContact: ["", [Validators.required]],
-            pointOfConnection: ["", []],
             street: ["", [Validators.required]],
-            town: ["", [Validators.required]],
-            city: ["", [Validators.required]],
-            code: ["", [Validators.required]],
+            town: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            city: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            code: ["", [Validators.required]]
         })
     }
 
     createEventDetailsForm() {
         this.eventDetailsForm = this.formBuilder.group({
-            eventCity: ["", [Validators.required]],
-            eventTown: ["", [Validators.required]],
-            eventProvince: ["", [Validators.required]],
+            street: ["", [Validators.required, Validators.pattern('^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$')]],
+            eventCity: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            eventTown: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            eventProvince: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
             eventCode: ["", [Validators.required]],
-            cause: ["", [Validators.required]],
-            claimType: ["", [Validators.required]],
-            causeComment: ["", []]
+            claimType: ["", [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
         })
     }
 }
